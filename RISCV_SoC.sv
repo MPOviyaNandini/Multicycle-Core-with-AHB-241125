@@ -118,9 +118,6 @@ module RISCV_SoC (
   input logic clk,
   input logic reset,
   output logic hready
- // input logic boot_wr_en,
- // input logic [31:0] boot_wr_addr,
- // input logic [7:0] boot_wr_data
 );
 
   // === Internal Signals ===
@@ -169,8 +166,6 @@ module RISCV_SoC (
     .hr_data(hr_data),
     .hready(hready),
     .hresp(hresp),
-    //.HSEL1(HSEL1),
-    //.HSEL2(HSEL2)
     .muxsel(muxsel)
   );
 
@@ -194,7 +189,6 @@ module RISCV_SoC (
     .hresp(hresp),
     .HSEL1(HSEL1),
     .HSEL2(HSEL2),
-    //.Htrans(Htrans),
     .Hwrite(Hwrite),
     .Hsize(Hsize),
     .Hprot(Hprot),
@@ -208,9 +202,6 @@ module RISCV_SoC (
   slave_wrapper slave_mem (
     .clk(clk),
     .reset(sync_reset),
-   // .boot_wr_en(boot_wr_en),
-   // .boot_wr_addr(boot_wr_addr),
-   // .boot_wr_data(boot_wr_data),
     .HSEL1(HSEL1),
     .HSEL2(HSEL2),
     .haddr(Haddr),
@@ -218,7 +209,6 @@ module RISCV_SoC (
     .hprot(Hprot),
     .hwrite(Hwrite),
     .hsize(Hsize),
-    //.htrans(Htrans),
     .is_signed(Is_signed),
     .instruction(instruction),
     .load_out(hrdata_data),
