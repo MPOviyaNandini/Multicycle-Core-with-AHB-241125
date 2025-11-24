@@ -65,7 +65,7 @@ module master_glue_logic (
     end
 
     // Next-state logic and outputs
-    always_ff @(posedge clk) begin
+    always_comb begin
         // Defaults
         nextstate = state;
         is_signed = 1'b0;
@@ -118,13 +118,12 @@ module master_glue_logic (
                         default: hsize = 3'b010;
                     endcase
 
-                    mem_out <= hr_data;  // capture load result
                     nextstate = INIT;
                 end
             end
 
-            WRITE_DATA_WAIT1: nextstate <= WRITE_DATA_WAIT2;
-            //WRITE_DATA_WAIT2: nextstate <= WRITE_DATA_WAIT3;
+            WRITE_DATA_WAIT1: nextstate = WRITE_DATA_WAIT2;
+            
             
             WRITE_DATA_WAIT2: begin 
                 if (hready && !hresp) begin
