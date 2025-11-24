@@ -39,23 +39,6 @@ module slave_glue (
             inst_wait_cnt  <= 2'd0;
             data_wait_cnt  <= 2'd0;
         end else begin
-            /*// --------------------
-            // Default every cycle
-            // --------------------
-            wr_en_ram    <= 1'b0;
-            rd_en_ram    <= 1'b0;
-            rd_en_rom    <= 1'b0;
-            hresp_inst   <= 1'b0;
-            hresp_data   <= 1'b0;
-
-            // Explicitly default ready signals each cycle (important!)
-            hready_inst  <= 1'b1;
-            hready_data  <= 1'b1;*/
-
-            // ---------------------------
-            // INSTRUCTION (ROM) ACCESS 
-            // ---------------------------
-            // Start of access: detect ROM region and start 2-cycle wait
             if (haddr[31:24] == 8'hA0 && inst_wait_cnt == 0) begin
                 rd_en_rom      <= 1'b1;
                 address_rom    <= haddr;
